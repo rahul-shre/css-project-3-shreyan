@@ -1,124 +1,221 @@
-*{
+/* Base Styles */
+:root {
+    /* Typography Scale */
+    --font-size-sm: 0.875rem;
+    --font-size-base: 0.8rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 2rem;
+
+    /* Spacing Scale */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-html,body{
+html, body {
     height: 100%;
     width: 100%;
 }
 
-#main{
-    height: 100%;
+#main {
+    min-height: 100%;
     width: 100%;
-  
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
-#nav{
-    height: 80px;
+/* Navigation Styles */
+#nav {
+    height: 5rem;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 40px;
+    padding: var(--spacing-lg);
 }
 
-#nav-part1, #nav-part2{
+#nav-part1, #nav-part2 {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 2px;
-    
+    gap: var(--spacing-xs);
 }
 
-
-.logo{
-    height: 30px;
-    width: 30px;
+.logo {
+    height: 1.875rem;
+    width: 1.875rem;
     background-color: black;
     border-radius: 50%;
 }
 
-#nav-part2{
-    gap: 90px;
+#nav-part2 {
+    gap: 1.5rem;
 }
 
-#nav-part2 > h4{
-    font-size: 30px;
+#nav-part2 > h4 {
+    font-size: var(--font-size-lg);
     font-weight: 400;
 }
 
-#nav-part2 > h4 span{
-    color: rgb(159, 159, 159);
-    margin-left: 30px;
+#nav-part2 > h5 {
+    display: none;
 }
 
-/* nav2 */
+#nav-part2 > h4 span {
+    color: rgb(159, 159, 159);
+    margin-left: var(--spacing-md);
+}
 
-#nav2{
-    height: 80px;
+/* Secondary Navigation */
+#nav2 {
+    height: 5rem;
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 90px;
-    padding: 0 50px;
+    justify-content: flex-start; /* Align items to the right */
+    padding: 0 var(--spacing-lg);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
 
-#nav2 > h3{
-    font-size: 25px;
+#nav2 > h3 {
+    font-size: var(--font-size-lg);
     text-transform: uppercase;
     font-weight: 500;
+    white-space: nowrap;
+    padding: 0 var(--spacing-md);
 }
 
-#content{
-    /* learned calc */
-    height: calc(100% - 160px); 
+/* Content Styles */
+#content {
+    height: calc(100vh - 10rem);
     width: 100%;
 }
 
-#text-content{
+#text-content {
     width: 100%;
     height: 45%;
     display: flex;
-    flex-wrap: nowrap;
     overflow-x: auto;
 }
-/* How to edit scrollbar */
-#text-content::-webkit-scrollbar{
-   background-color: transparent;
-   width: 6px;
-   height:15px;
-   scrollbar-width: 30px;
 
+/* Scrollbar Styles - Fixed Version */
+/* Firefox */
+#text-content {
+    scrollbar-width: thin;
+    scrollbar-color: red transparent;
 }
-#text-content::-webkit-scrollbar-thumb{
+
+/* Webkit browsers (Chrome, Safari, newer Edge) */
+#text-content::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+#text-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#text-content::-webkit-scrollbar-thumb {
     background-color: red;
-    
+    border-radius: 10px;
 }
-.elem{
-    flex-shrink: 0;
+
+.elem {
+    flex: 0 0 50%;
     height: 100%;
-    width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* learned flex wrap,flex shrin, overflow x auto */
-
-.elem > h1{
-    font-size: 150px;
+.elem > h1 {
+    font-size: clamp(2rem, 8vw, 9.375rem);
     font-weight: 300;
+    white-space: nowrap;
 }
 
-#image-content{
-    height: 60%;
+#image-content {
+    height: 55%;
     width: 100%;
 }
-#image-content img{
+
+#image-content img {
     height: 100%;
     width: 100%;
     object-fit: cover;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    :root {
+        /* Adjust scale for mobile */
+        --font-size-lg: 1rem;
+        --font-size-xl: 1.125rem;
+    }
+
+    #nav {
+        padding: var(--spacing-md);
+    }
+
+    #nav-part2 {
+        gap: var(--spacing-md);
+    }
+
+    #nav-part2 > h4 {
+        display: none;
+    }
+
+    #nav-part2 > h4:first-child {
+        display: block;
+    }
+
+    #nav-part2 > h5 {
+        display: block;
+        font-size: var(--font-size-xl);
+    }
+
+    #nav2 {
+        gap: var(--spacing-md);
+        padding: 0 var(--spacing-md);
+    }
+
+    #nav2 > h3 {
+        font-size: var(--font-size-base);
+    }
+
+    #text-content {
+        height: 30%;
+    }
+
+    .elem > h1 {
+        font-size: clamp(3rem, 10vw, 12rem);
+        white-space: nowrap;
+        padding-left: 15vw;
+    }
+
+    #image-content {
+        height: 70%;
+    }
+}
+
+/* Large Screen Optimizations */
+@media (min-width: 1024px) {
+    #nav2 {
+        gap: 2rem;
+    }
+
+    #nav-part2 {
+        gap: 2rem;
+    }
 }
